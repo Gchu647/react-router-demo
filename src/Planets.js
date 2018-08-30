@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Route, Switch } from 'react-router-dom';
 import PlanetsList from './PlanetsList';
 import Planet from './Planet';
 
@@ -13,6 +13,7 @@ class Planets extends Component {
   }
 
   componentDidMount() {
+    // Fetch is are low level api that works like axios, and it is being build into a browser.
     return fetch('https://swapi.co/api/planets')
       .then(response => {
         return response.json();
@@ -30,7 +31,22 @@ class Planets extends Component {
 
   render() {
     return(
-      <PlanetsList planets={this.state.planets} />
+      <Switch>
+        <Route 
+          exact
+          path='/planets'
+          render={
+            () => {
+              return (<PlanetsList planets={this.state.planets} />);
+            }
+          }
+        /> 
+        <Route 
+          exact
+          path='/planets/:id'
+          component={Planet}
+        />
+      </Switch>
     );
   }
 }

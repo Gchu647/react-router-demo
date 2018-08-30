@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 class Planet extends Component {
   constructor(props) {
@@ -7,9 +8,8 @@ class Planet extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    console.log('componentsWillMount')
-    const planetId = 0;
+  componentDidMount() {
+    const planetId = this.props.match.params.id; // Works kind of like express params
     if(planetId) {
       return fetch(`https://swapi.co/api/planets/${planetId}`)
         .then(response => {
@@ -27,6 +27,11 @@ class Planet extends Component {
 
   render() {
     console.log('render', this.state)
+    if(this.state.detail ==='Not found') {
+      return (
+        <Redirect to='/planets' />
+      )
+    }
     const {
       climate,
       diameter,

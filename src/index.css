@@ -28,6 +28,25 @@ header {
   margin: 15px 15px 0;
 }
 
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+nav a {
+  display: inline-block;
+  margin: 10px 0 10px 20px;
+  padding: 20px;
+  background: #bbb;
+}
+/* React Nav defined the active class for you */
+nav a.active {
+  color: white;
+  background-color: #292C34;
+}
+
 #root {
   height: 100%;
 }
